@@ -165,6 +165,12 @@ const AdminPanel = () => {
                   textAlign: "left", 
                   fontWeight: "600",
                   borderBottom: "2px solid #2980b9"
+                }}>Profile</th>
+                <th style={{ 
+                  padding: "15px", 
+                  textAlign: "left", 
+                  fontWeight: "600",
+                  borderBottom: "2px solid #2980b9"
                 }}>Full Name</th>
                 <th style={{ 
                   padding: "15px", 
@@ -206,24 +212,42 @@ const AdminPanel = () => {
                     fontSize: "14px",
                     borderBottom: "1px solid #eee"
                   }}>
-                    <div style={{ display: "flex", alignItems: "center" }}>
+                    {student.profilePicture ? (
+                      <img 
+                        src={student.profilePicture} 
+                        alt={`${student.firstName} ${student.lastName}`}
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                          border: "2px solid #3498db"
+                        }} 
+                      />
+                    ) : (
                       <div style={{ 
-                        width: "32px", 
-                        height: "32px", 
+                        width: "40px", 
+                        height: "40px", 
                         borderRadius: "50%", 
                         backgroundColor: "#3498db", 
                         color: "white", 
                         display: "flex", 
                         alignItems: "center", 
                         justifyContent: "center", 
-                        marginRight: "10px",
-                        fontSize: "12px",
+                        fontSize: "14px",
                         fontWeight: "bold"
                       }}>
                         {student.firstName?.[0]}{student.lastName?.[0]}
                       </div>
-                      <span style={{ fontWeight: "500" }}>{student.firstName} {student.lastName}</span>
-                    </div>
+                    )}
+                  </td>
+                  <td style={{ 
+                    padding: "15px", 
+                    fontSize: "14px",
+                    borderBottom: "1px solid #eee",
+                    fontWeight: "500"
+                  }}>
+                    {student.firstName} {student.lastName}
                   </td>
                   <td style={{ 
                     padding: "15px", 
@@ -317,7 +341,7 @@ const AdminPanel = () => {
               {students.length === 0 && (
                 <tr>
                   <td 
-                    colSpan="5" 
+                    colSpan="6" 
                     style={{ 
                       padding: "30px", 
                       textAlign: "center", 

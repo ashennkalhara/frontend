@@ -5,18 +5,21 @@ const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [loginFailed, setLoginFailed] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setLoginFailed(false);
   
     setTimeout(() => {
       if (username === "admin" && password === "admin123") {
         localStorage.setItem("adminToken", "your_fake_jwt_token"); // Store token
         navigate("/admin"); // Redirect to Admin Panel after login
       } else {
-        alert("❌ Invalid Username or Password");
+        setLoginFailed(true);
+        // alert("❌ Invalid Username or Password"); // Replaced with in-form message
       }
       setIsLoading(false);
     }, 500);
@@ -56,6 +59,24 @@ const AdminLogin = () => {
           marginBottom: "25px",
           fontWeight: "600"
         }}>Admin Login</h2>
+        
+        {loginFailed && (
+          <div style={{
+            backgroundColor: "#fee2e2",
+            color: "#ef4444",
+            padding: "12px",
+            borderRadius: "6px",
+            marginBottom: "20px",
+            fontSize: "14px",
+            fontWeight: "500",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}>
+            <span style={{ marginRight: "8px" }}>❌</span>
+            Invalid Username or Password
+          </div>
+        )}
         
         <form onSubmit={handleLogin} style={{ textAlign: "left" }}>
           <div style={{ marginBottom: "20px" }}>
